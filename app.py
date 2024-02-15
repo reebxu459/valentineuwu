@@ -52,11 +52,11 @@ stages = {
     },
     6: {
         'image': "assets/stressed3.png",
-        'message': "<p class='large-text'>Come on, think about the last one some more!</p>"
+        'message': "<p class='large-text'>Are you sure you want to do this?</p>"
     },
     7: {
         'image': "assets/resolution.png",
-        'message': "<p class='large-text'>FINE. Dinner and dessert are both on me if you accept.</p>"
+        'message': "<p class='large-text'>You made me resort to this...</p>"
     },
     8: {
         'image': "assets/muah.png",
@@ -70,7 +70,7 @@ if 'stage' not in st.session_state:
 def set_state(i):
     st.session_state.stage = i
 
-if st.session_state.stage < 8:
+if st.session_state.stage < 10:
     st.markdown("<p class='title'>Wanna be my Valentine?</p>", unsafe_allow_html=True)
 
 if st.session_state.stage < 8:
@@ -80,13 +80,42 @@ if st.session_state.stage < 8:
 
     col1, col2 = st.columns(2)
     with col1: 
-        st.button('Yes', on_click=set_state, args=[8])
+        st.button('Yes', on_click=set_state, args=[11])
     with col2:
         if st.button('No', on_click=set_state, args=[st.session_state.stage + 1]):
             st.markdown(current_stage['message'], unsafe_allow_html=True)
 
+# having fun lol
+if st.session_state.stage == 8:
+    image = "assets/hacking.jpg"
+    st.image(image, use_column_width=True, width=0.8)
+    col1, col2 = st.columns(2)
+    with col1: 
+        st.button('Yes', on_click=set_state, args=[11])
+    with col2:
+        st.button('...', on_click=set_state, args=[st.session_state.stage + 1])
+
+if st.session_state.stage == 9:
+    image = "assets/hacking2.JPG"
+    st.image(image, use_column_width=True, width=0.8)
+    col1, col2 = st.columns(2)
+    with col1: 
+        st.button('Yes', on_click=set_state, args=[11])
+    with col2:
+        st.button('...', on_click=set_state, args=[st.session_state.stage + 1])
+
+if st.session_state.stage == 10:
+    st.markdown("<p class='title'>You can't escape now.</p>", unsafe_allow_html=True)
+    image = "assets/scary.jpg"
+    st.image(image, use_column_width=True, width=0.8)
+    col1, col2 = st.columns(2)
+    with col1:
+        st.button('Yes', on_click=set_state, args=[11])
+    with col2:
+        st.button('Yes ', on_click=set_state, args=[11])
+
 # HE SAID YES!!
-if st.session_state.stage >= 8:
+if st.session_state.stage >= 11:
     image = "assets/muah.png"
     st.image(image, use_column_width=True, width=0.8)
     st.balloons()
